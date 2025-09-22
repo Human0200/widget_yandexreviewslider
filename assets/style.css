@@ -1,0 +1,4 @@
+.lsyr_app-body{display:flex;gap:16px;align-items:flex-start}
+.lsyr_review-item{background:#fff;border:1px solid #eee;border-radius:8px;padding:16px}
+.lsyr_business-review-view__author-image{width:40px;height:40px;border-radius:50%;background:#ececec;overflow:hidden}
+.lsyr_business-review-view__date{font-size:12px;color:#757575}

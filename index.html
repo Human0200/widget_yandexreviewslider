@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yandex Reviews Slider — Proxy (debug)</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/compat.css">
+  <style>body{margin:0;font-family:Arial,Helvetica,sans-serif}</style>
+</head>
+<body>
+  <div class="lsyr_app-body">
+    <div class="lsyr_review-list">
+      <div class="lsyr_slider-viewport"><div class="lsyr_slider-track" id="track"></div></div>
+      <div class="lsyr_review-bottom">
+        <button class="lsyr_button-prev" id="prev" aria-label="Предыдущие">&#9664;</button>
+        <div class="lsyr_pagination" id="pagination"></div>
+        <button class="lsyr_button-next" id="next" aria-label="Следующие">&#9654;</button>
+      </div>
+    </div>
+    <aside class="lsyr_business-summary-rating-badge-view" id="companyBox">
+      <div class="lsyr_business-summary-rating-badge-view__rating-text" id="companyRating">—</div>
+      <div class="lsyr_business-summary-rating-badge-view__rating" id="companyStars"></div>
+      <div class="lsyr_reviews-count" id="companyCounts">—</div>
+      <div class="lsyr_buttons"><a class="lsyr_reviews-btn" id="companyLink" target="_blank" rel="noopener">Все отзывы</a></div>
+    </aside>
+  </div>
+
+<script>
+const CONFIG = {
+  COMPANY_ID: "45616405414",
+  PROXY_URL: "/api/proxy.php",
+  LIMIT: 12,
+  HIDE_NEGATIVE: true,
+  SORT: { column: "timestamp", order: "desc" }
+};
+const MAPS_BASE = "https://yandex.ru/maps/org";
+
+function buildUrl(action){
+  const u = new URL(CONFIG.PROXY_URL, location.origin);
+  u.searchParams.set("ACTION", action);
+  u.searchParams.set("COMPANY_ID", CONFIG.COMPANY_ID);
+  return u.toString();
+}
+
+// Safer JSON fetch with helpful error messages
+async function fetchJson(url){
+  const res = await fetch(url, { headers: { Accept: "application/json" } });
+  const ct = (res.headers.get("content-type") || "").toLowerCase();
+  const raw = await res.text();
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}. Body preview: ${raw.slice(0,220)}`);
+  }
+  let json;
+  try {
+    json = JSON.parse(raw);
+  } catch (e) {
+    throw new Error(`Ответ не JSON. Content-Type: ${ct || "n/a"}. Превью: ${raw.slice(0,220)}`);
+  }
+  if (!json || (json.status && json.status !== "success")) {
+    throw new Error(json && (json.message || json.error) ? json.message || json.error : "Некорректный JSON-ответ от сервера");
+  }
+  return json.data || json;
+}
+
+function svgStars(n){
+  const full = Math.floor(n), half = (n-full)>=0.5?1:0, empty = 5-full-half;
+  const items = [];
+  for(let i=0;i<full;i++) items.push('<svg width="16" height="16" viewBox="0 0 24 24"><path fill="#FFB400" d="M12 .587l3.668 7.431L24 9.748l-6 5.853 1.417 8.26L12 19.771 4.583 23.86 6 15.601 0 9.748l8.332-1.73z"/></svg>');
+  if(half) items.push('<svg width="16" height="16" viewBox="0 0 24 24"><defs><linearGradient id="half"><stop offset="50%" stop-color="#FFB400"/><stop offset="50%" stop-color="#E0E0E0"/></linearGradient></defs><path fill="url(#half)" d="M12 .587l3.668 7.431L24 9.748l-6 5.853 1.417 8.26L12 19.771 4.583 23.86 6 15.601 0 9.748l8.332-1.73z"/></svg>');
+  for(let i=0;i<empty;i++) items.push('<svg width="16" height="16" viewBox="0 0 24 24"><path fill="#E0E0E0" d="M12 .587l3.668 7.431L24 9.748l-6 5.853 1.417 8.26L12 19.771 4.583 23.86 6 15.601 0 9.748l8.332-1.73z"/></svg>');
+  return '<div class="lsyr_business-rating-badge-view__stars">'+items.join("")+'</div>';
+}
+
+function mapCompany(raw){
+  const ratingNum = Number(raw.rating ?? 5) || 5;
+  return { name: raw.name || "", rating: Number.isInteger(ratingNum) ? String(ratingNum) : ratingNum.toFixed(1), reviews_count: raw.reviews_count ?? raw.countmarks ?? 0 };
+}
+function mapReview(r){
+  const ts = Number(r.timestamp ?? Date.now()/1000) || Math.floor(Date.now()/1000);
+  const date = r.date || new Date(ts*1000).toISOString().slice(0,10);
+  return { name: r.name || "Пользователь", image: r.image || r.avatar || "", rating: Number(r.rating ?? 5) || 5, timestamp: ts, date: date, text: r.text || "" };
+}
+function sortAndFilter(rs){
+  let res = rs.slice();
+  if (CONFIG.HIDE_NEGATIVE) res = res.filter(x => x.rating>=4);
+  if (CONFIG.SORT && CONFIG.SORT.column){
+    const col = CONFIG.SORT.column, dir = (CONFIG.SORT.order||"asc").toLowerCase()==="desc" ? -1 : 1;
+    res.sort((a,b) => (a[col]>b[col]?1:-1)*dir);
+  }
+  if (CONFIG.LIMIT) res = res.slice(0, CONFIG.LIMIT);
+  return res;
+}
+function escapeHtml(s){ return (s||"").replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+function slideTemplate(r){
+  const avatar = r.image ? '<img src="'+r.image+'" alt="avatar" />' : "";
+  return `
+    <div class="lsyr_slide">
+      <div class="lsyr_review-item lsyr_review-box">
+        <div class="lsyr_business-review-view__header">
+          <div class="lsyr_business-review-view__author-container">
+            <div class="lsyr_business-review-view__author-image">${avatar}</div>
+            <div>
+              <div><strong>${escapeHtml(r.name)}</strong></div>
+              <div class="lsyr_business-review-view__date">${escapeHtml(r.date)}</div>
+            </div>
+          </div>
+          ${svgStars(r.rating)}
+        </div>
+        <div class="lsyr_business-review-view__body">
+          <p class="lsyr_readmore lsyr_clamped">${escapeHtml(r.text)}</p>
+          <a class="lsyr_readmore-toggle lsyr_reviews-btn" href="javascript:void(0)">Читать полностью</a>
+        </div>
+      </div>
+    </div>`;
+}
+function clampText(el){
+  const toggle = el.nextElementSibling;
+  if (!toggle) return;
+  toggle.addEventListener("click", () => {
+    el.classList.toggle("lsyr_clamped");
+    toggle.textContent = el.classList.contains("lsyr_clamped") ? "Читать полностью" : "Свернуть";
+  });
+}
+function initSlider(){
+  const track=document.getElementById("track");
+  const prev=document.getElementById("prev");
+  const next=document.getElementById("next");
+  const pag=document.getElementById("pagination");
+  const slides=Array.from(track.children);
+  if(!slides.length) return;
+  function spv(){ return window.innerWidth>=1024?3:(window.innerWidth>=700?2:1); }
+  let current=0;
+  function pages(){ return Math.max(1, Math.ceil(slides.length / spv())); }
+  function goTo(p){
+    const page = Math.max(0, Math.min(pages()-1, p));
+    current = page;
+    const width = slides[0].getBoundingClientRect().width;
+    track.style.transform = 'translate3d(' + (-(page*spv())*width) + 'px,0,0)';
+    update();
+  }
+  function rebuildPag(){
+    pag.innerHTML = "";
+    for (let i=0;i<pages();i++){
+      const b = document.createElement("span");
+      b.className = "lsyr_pagination-bullet"+(i===current?" lsyr_pagination-bullet-active":"");
+      b.addEventListener("click", ()=>goTo(i));
+      pag.appendChild(b);
+    }
+  }
+  function update(){
+    Array.from(pag.children).forEach((b,i)=>b.classList.toggle("lsyr_pagination-bullet-active", i===current));
+    prev.disabled = current===0;
+    next.disabled = current>=pages()-1;
+  }
+  window.addEventListener("resize", ()=>{ rebuildPag(); goTo(Math.min(current, pages()-1)); });
+  prev.addEventListener("click", ()=>goTo(current-1));
+  next.addEventListener("click", ()=>goTo(current+1));
+  rebuildPag(); goTo(0);
+}
+async function main(){
+  try{
+    const companyRaw = await fetchJson(buildUrl("PARSE_COMPANY_DIRECT"));
+    const company = mapCompany(companyRaw);
+    document.getElementById("companyRating").textContent = company.rating;
+    document.getElementById("companyStars").innerHTML = svgStars(parseFloat(company.rating));
+    document.getElementById("companyCounts").textContent = "На основе " + company.reviews_count + " отзывов";
+    document.getElementById("companyLink").href = `${MAPS_BASE}/${CONFIG.COMPANY_ID}/reviews/`;
+
+    const reviewsRaw = await fetchJson(buildUrl("PARSE_REVIEWS_DIRECT"));
+    const reviews = sortAndFilter((Array.isArray(reviewsRaw)?reviewsRaw:reviewsRaw.items||[]).map(mapReview));
+    const track = document.getElementById("track");
+    track.innerHTML = reviews.map(slideTemplate).join("");
+    document.querySelectorAll(".lsyr_readmore").forEach(clampText);
+    initSlider();
+  } catch (e){
+    console.error(e);
+    document.getElementById("track").innerHTML = '<div style="padding:12px;color:#b00;background:#fff3f3;border:1px solid #ffd0d0;border-radius:6px">Ошибка загрузки: '+(e && e.message ? e.message : e)+'</div>';
+  }
+}
+main();
+</script>
+</body>
+</html>
