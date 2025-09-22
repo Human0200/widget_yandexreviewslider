@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-// Stronger error handling
 error_reporting(E_ALL);
 ini_set('display_errors', '0');
 ini_set('log_errors', '1');
@@ -18,7 +17,6 @@ $EXTERNAL = 'http://217.114.4.16/seleniumParser/direct_parser.php';
 $action = $_GET['ACTION'] ?? '';
 $companyId = $_GET['COMPANY_ID'] ?? '';
 
-// Quick self-test
 if (isset($_GET['TEST']) && $_GET['TEST'] === '1') {
   echo json_encode(['status'=>'success','data'=>['ok'=>true,'ts'=>time()]], JSON_UNESCAPED_UNICODE);
   exit;
@@ -34,15 +32,12 @@ $opts = [
   'http' => [
     'method' => 'GET',
     'timeout' => 30,
-    'header' => "Accept: application/json
-User-Agent: YandexReviewsSlider/1.0
-",
+    'header' => "Accept: application/json\r\nUser-Agent: YandexReviewsSlider/1.0\r\n",
     'ignore_errors' => true,
   ]
 ];
 $ctx = stream_context_create($opts);
 $url = $EXTERNAL . '?' . http_build_query(['ACTION'=>$action,'COMPANY_ID'=>$companyId], '', '&');
-
 $body = @file_get_contents($url, false, $ctx);
 $code = 200;
 if (isset($http_response_header) && preg_match('~HTTP/\d+\.\d+\s+(\d{3})~', $http_response_header[0], $m)) {
@@ -55,10 +50,8 @@ if ($body === false) {
   exit;
 }
 
-// Ensure JSON
 $trim = ltrim($body);
 $startsJson = strlen($trim) && ($trim[0] === '{' || $trim[0] === '[');
-
 if ($code >= 400 || !$startsJson) {
   http_response_code(502);
   echo json_encode([
@@ -69,5 +62,4 @@ if ($code >= 400 || !$startsJson) {
   exit;
 }
 
-// Pass-through upstream JSON as-is
 echo $body;

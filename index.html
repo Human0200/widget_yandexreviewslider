@@ -4,181 +4,73 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yandex Reviews Slider — Proxy (debug)</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="assets/compat.css">
-  <style>body{margin:0;font-family:Arial,Helvetica,sans-serif}</style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="lsyr_app-body">
+    <div class="lsyr_review-box lsyr_review-unselectable">
+      <div class="lsyr_business-summary-rating-badge-view__rating">
+        <span id="companyName">Загрузка...</span>
+        <br><br>
+        <span id="companyRating">—</span> из 5
+      </div>
+      <div class="lsyr_business-rating-badge-view__stars" id="companyStars">
+        <!-- Stars will be generated here -->
+      </div>
+      <a target="_blank" href="" id="companyMapLink">
+        <svg width="139" height="28" viewBox="0 0 138.89 28.203" xmlns="http://www.w3.org/2000/svg" style="width: 80px;">
+          <g fill-rule="evenodd">
+            <path d="m27.603 13.801c0-7.6225-6.1792-13.801-13.802-13.801s-13.802 6.1789-13.802 13.801c0 7.6222 6.1794 13.802 13.802 13.802s13.802-6.1793 13.802-13.802z" fill="#fc3f1d"/>
+            <path d="m15.642 7.8207h-1.2652c-2.3577 0-3.5656 1.2075-3.5656 2.9332 0 1.9553 0.8626 2.8752 2.5881 4.0825l1.4377 0.978-4.1405 6.2106h-3.1054l3.7378-5.5209c-2.1281-1.5524-3.3354-3.0478-3.3354-5.5206 0-3.1628 2.1853-5.2907 6.3833-5.2907h4.1405v16.39h-2.8753z" fill="#fff"/>
+            <path d="m43.617 0.0259c-6.1202 0-11.081 4.9608-11.081 11.081 0 3.0587 1.2397 5.8285 3.2437 7.8339 2.0054 2.0061 6.7289 4.9092 7.006 7.9567 0.0419 0.4572 0.3728 0.8313 0.8314 0.8313s0.7894-0.3741 0.8313-0.8313c0.2771-3.0475 5.0006-5.9506 7.006-7.9567 2.0041-2.0054 3.2437-4.7752 3.2437-7.8339 0-6.1202-4.9608-11.081-11.081-11.081z" fill="#f43"/>
+            <path d="m43.617 14.986c2.1422 0 3.8782-1.7367 3.8782-3.8782 0-2.1422-1.736-3.8789-3.8782-3.8789s-3.8782 1.7367-3.8782 3.8789c0 2.1415 1.736 3.8782 3.8782 3.8782z" fill="#fff"/>
+            <path d="m127.84 21.07h-1.6492v-4.8147h1.734c1.5261 0 2.4213 0.688 2.4213 2.4217 0 1.7336-0.9896 2.393-2.5061 2.393zm7.4906-12.22v15.028h3.5614v-15.028zm-12.692 0v15.028h5.4085c3.4957 0 5.9735-1.7901 5.9735-5.3235 0-3.3452-2.2139-5.1066-5.9171-5.1066h-1.9128v-4.5984zm-2.0917 2.8077v-2.8077h-11.919v2.8077h4.1837v12.221h3.5521v-12.221zm-19.259 9.7053c-1.8845 0-2.8451-1.5171-2.8451-4.9847 0-3.4954 1.0173-5.0125 3.0243-5.0125 1.9408 0 2.8927 1.5171 2.8927 4.9844 0 3.4957-1.0176 5.0128-3.0719 5.0128zm-3.109-12.513h-3.2885v19.353h3.5524v-6.0869c0.9045 1.338 2.2138 2.0543 3.7406 2.0543 3.458 0 5.851-2.7703 5.851-7.8205 0-5.0224-2.3273-7.7921-5.6725-7.7921-1.6766 0-3.0526 0.7724-4.0039 2.2328zm-9.705 11.439c-0.4524 0.6593-1.2909 1.1965-2.5441 1.1965-1.4888 0-2.2425-0.8385-2.2425-2.1201 0-1.7053 1.2251-2.3272 4.2778-2.3272h0.5088zm3.5521-6.6617c0-3.6369-1.8564-5.0128-5.6157-5.0128-2.3556 0-4.2115 0.7446-5.2861 1.3759v2.9585c0.9519-0.7253 3.0436-1.4981 4.8714-1.4981 1.6962 0 2.4783 0.5936 2.4783 2.2142v0.8291h-0.5749c-5.4368 0-7.8488 1.7997-7.8488 4.8433 0 3.0433 1.8467 4.7489 4.5983 4.7489 2.0914 0 2.9866-0.6877 3.6743-1.404h0.1511c0.028 0.386 0.1505 0.8949 0.2639 1.1965h3.467c-0.1224-1.2249-0.1788-2.4497-0.1788-3.6746zm-16.338 10.252h4.212l-7.3777-10.902 6.6898-9.8558h-3.6749l-6.4258 9.5542v-9.5542h-3.6088v20.757h3.6088v-9.7427z"/>
+          </g>
+        </svg>
+      </a>
+      <div class="lsyr_reviews-count" id="companyCounts">
+        <a target="_blank" href="" id="companyCountsLink">на основе — отзывов</a>
+      </div>
+      <a target="_blank" href="" id="companyReviewLink" class="lsyr_reviews-btn lsyr_reviews-btn-form" rel="nofollow noreferrer noopener">Оставить отзыв</a>
+    </div>
+    
     <div class="lsyr_review-list">
-      <div class="lsyr_slider-viewport"><div class="lsyr_slider-track" id="track"></div></div>
+      <div class="lsyr_slider-viewport">
+        <div class="lsyr_slider-track" id="track">
+          <!-- Reviews will be generated here -->
+        </div>
+      </div>
+      
       <div class="lsyr_review-bottom">
-        <button class="lsyr_button-prev" id="prev" aria-label="Предыдущие">&#9664;</button>
-        <div class="lsyr_pagination" id="pagination"></div>
-        <button class="lsyr_button-next" id="next" aria-label="Следующие">&#9654;</button>
+        <div class="lsyr_buttons">
+          <button class="lsyr_button-prev" id="prev" tabindex="0" role="button" aria-label="Previous slide">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="height: 12px">
+              <path d="m70.143 97.5-44.71-44.711a3.943 3.943 0 0 1 0-5.578l44.71-44.711 5.579 5.579-41.922 41.921 41.922 41.922z"/>
+            </svg>
+          </button>
+          <button class="lsyr_button-next" id="next" tabindex="0" role="button" aria-label="Next slide">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="height: 12px;">
+              <path d="m70.143 97.5-44.71-44.711a3.943 3.943 0 0 1 0-5.578l44.71-44.711 5.579 5.579-41.922 41.921 41.922 41.922z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="lsyr_pagination lsyr_pagination-clickable lsyr_pagination-bullets lsyr_pagination-horizontal" id="pagination">
+          <!-- Pagination bullets will be generated here -->
+        </div>
+        <div class="lsyr_business-review-view_copy">
+          <div>разработано</div>
+          <a href="https://lead-space.ru/?utm_source=marketplace.1c-bitrix" target="_blank">
+            <svg width="189" height="69" viewBox="0 0 189 69" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:70px">
+              <path d="M189 64.552H174.88V40.0342H189V44.2938H180.078V49.677H188.38V53.9366H180.078V60.2589H189V64.552Z" fill="#232323"/>
+              <path d="M163.392 44.0086C161.436 44.0086 159.921 44.7464 158.848 46.2222C157.774 47.6868 157.238 49.7327 157.238 52.36C157.238 57.8271 159.289 60.5606 163.392 60.5606C165.114 60.5606 167.199 60.1302 169.648 59.2693V63.6295C167.635 64.468 165.388 64.8873 162.906 64.8873C159.34 64.8873 156.612 63.8084 154.722 61.6507C152.833 59.4817 151.888 56.3737 151.888 52.3265C151.888 49.7775 152.352 47.547 153.28 45.6353C154.208 43.7123 155.538 42.2421 157.271 41.2247C159.015 40.1962 161.056 39.6819 163.392 39.6819C165.774 39.6819 168.166 40.2577 170.57 41.4092L168.893 45.6353C167.976 45.1992 167.054 44.8191 166.126 44.4949C165.198 44.1707 164.287 44.0086 163.392 44.0086Z" fill="#232323"/>
+              <path d="M144.274 64.5518L142.497 58.7158H133.558L131.781 64.5518H126.179L134.833 39.9333H141.189L149.875 64.5518H144.274ZM141.256 54.3556C139.612 49.0674 138.684 46.0768 138.472 45.3836C138.271 44.6905 138.125 44.1426 138.036 43.7402C137.667 45.1712 136.61 48.7097 134.866 54.3556H141.256Z" fill="#232323"/>
+              <path d="M112.897 51.572H114.608C116.207 51.572 117.403 51.2589 118.197 50.6329C118.991 49.9956 119.387 49.0732 119.387 47.8658C119.387 46.6472 119.052 45.7472 118.381 45.1658C117.722 44.5845 116.682 44.2938 115.262 44.2938H112.897V51.572ZM124.636 47.6813C124.636 50.3198 123.809 52.3378 122.155 53.7353C120.511 55.1328 118.169 55.8316 115.128 55.8316H112.897V64.552H107.699V40.0342H115.53C118.504 40.0342 120.763 40.677 122.305 41.9627C123.859 43.2373 124.636 45.1435 124.636 47.6813Z" fill="#232323"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
-    <aside class="lsyr_business-summary-rating-badge-view" id="companyBox">
-      <div class="lsyr_business-summary-rating-badge-view__rating-text" id="companyRating">—</div>
-      <div class="lsyr_business-summary-rating-badge-view__rating" id="companyStars"></div>
-      <div class="lsyr_reviews-count" id="companyCounts">—</div>
-      <div class="lsyr_buttons"><a class="lsyr_reviews-btn" id="companyLink" target="_blank" rel="noopener">Все отзывы</a></div>
-    </aside>
   </div>
-
-<script>
-const CONFIG = {
-  COMPANY_ID: "45616405414",
-  PROXY_URL: "/api/proxy.php",
-  LIMIT: 12,
-  HIDE_NEGATIVE: true,
-  SORT: { column: "timestamp", order: "desc" }
-};
-const MAPS_BASE = "https://yandex.ru/maps/org";
-
-function buildUrl(action){
-  const u = new URL(CONFIG.PROXY_URL, location.origin);
-  u.searchParams.set("ACTION", action);
-  u.searchParams.set("COMPANY_ID", CONFIG.COMPANY_ID);
-  return u.toString();
-}
-
-// Safer JSON fetch with helpful error messages
-async function fetchJson(url){
-  const res = await fetch(url, { headers: { Accept: "application/json" } });
-  const ct = (res.headers.get("content-type") || "").toLowerCase();
-  const raw = await res.text();
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status}. Body preview: ${raw.slice(0,220)}`);
-  }
-  let json;
-  try {
-    json = JSON.parse(raw);
-  } catch (e) {
-    throw new Error(`Ответ не JSON. Content-Type: ${ct || "n/a"}. Превью: ${raw.slice(0,220)}`);
-  }
-  if (!json || (json.status && json.status !== "success")) {
-    throw new Error(json && (json.message || json.error) ? json.message || json.error : "Некорректный JSON-ответ от сервера");
-  }
-  return json.data || json;
-}
-
-function svgStars(n){
-  const full = Math.floor(n), half = (n-full)>=0.5?1:0, empty = 5-full-half;
-  const items = [];
-  for(let i=0;i<full;i++) items.push('<svg width="16" height="16" viewBox="0 0 24 24"><path fill="#FFB400" d="M12 .587l3.668 7.431L24 9.748l-6 5.853 1.417 8.26L12 19.771 4.583 23.86 6 15.601 0 9.748l8.332-1.73z"/></svg>');
-  if(half) items.push('<svg width="16" height="16" viewBox="0 0 24 24"><defs><linearGradient id="half"><stop offset="50%" stop-color="#FFB400"/><stop offset="50%" stop-color="#E0E0E0"/></linearGradient></defs><path fill="url(#half)" d="M12 .587l3.668 7.431L24 9.748l-6 5.853 1.417 8.26L12 19.771 4.583 23.86 6 15.601 0 9.748l8.332-1.73z"/></svg>');
-  for(let i=0;i<empty;i++) items.push('<svg width="16" height="16" viewBox="0 0 24 24"><path fill="#E0E0E0" d="M12 .587l3.668 7.431L24 9.748l-6 5.853 1.417 8.26L12 19.771 4.583 23.86 6 15.601 0 9.748l8.332-1.73z"/></svg>');
-  return '<div class="lsyr_business-rating-badge-view__stars">'+items.join("")+'</div>';
-}
-
-function mapCompany(raw){
-  const ratingNum = Number(raw.rating ?? 5) || 5;
-  return { name: raw.name || "", rating: Number.isInteger(ratingNum) ? String(ratingNum) : ratingNum.toFixed(1), reviews_count: raw.reviews_count ?? raw.countmarks ?? 0 };
-}
-function mapReview(r){
-  const ts = Number(r.timestamp ?? Date.now()/1000) || Math.floor(Date.now()/1000);
-  const date = r.date || new Date(ts*1000).toISOString().slice(0,10);
-  return { name: r.name || "Пользователь", image: r.image || r.avatar || "", rating: Number(r.rating ?? 5) || 5, timestamp: ts, date: date, text: r.text || "" };
-}
-function sortAndFilter(rs){
-  let res = rs.slice();
-  if (CONFIG.HIDE_NEGATIVE) res = res.filter(x => x.rating>=4);
-  if (CONFIG.SORT && CONFIG.SORT.column){
-    const col = CONFIG.SORT.column, dir = (CONFIG.SORT.order||"asc").toLowerCase()==="desc" ? -1 : 1;
-    res.sort((a,b) => (a[col]>b[col]?1:-1)*dir);
-  }
-  if (CONFIG.LIMIT) res = res.slice(0, CONFIG.LIMIT);
-  return res;
-}
-function escapeHtml(s){ return (s||"").replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
-function slideTemplate(r){
-  const avatar = r.image ? '<img src="'+r.image+'" alt="avatar" />' : "";
-  return `
-    <div class="lsyr_slide">
-      <div class="lsyr_review-item lsyr_review-box">
-        <div class="lsyr_business-review-view__header">
-          <div class="lsyr_business-review-view__author-container">
-            <div class="lsyr_business-review-view__author-image">${avatar}</div>
-            <div>
-              <div><strong>${escapeHtml(r.name)}</strong></div>
-              <div class="lsyr_business-review-view__date">${escapeHtml(r.date)}</div>
-            </div>
-          </div>
-          ${svgStars(r.rating)}
-        </div>
-        <div class="lsyr_business-review-view__body">
-          <p class="lsyr_readmore lsyr_clamped">${escapeHtml(r.text)}</p>
-          <a class="lsyr_readmore-toggle lsyr_reviews-btn" href="javascript:void(0)">Читать полностью</a>
-        </div>
-      </div>
-    </div>`;
-}
-function clampText(el){
-  const toggle = el.nextElementSibling;
-  if (!toggle) return;
-  toggle.addEventListener("click", () => {
-    el.classList.toggle("lsyr_clamped");
-    toggle.textContent = el.classList.contains("lsyr_clamped") ? "Читать полностью" : "Свернуть";
-  });
-}
-function initSlider(){
-  const track=document.getElementById("track");
-  const prev=document.getElementById("prev");
-  const next=document.getElementById("next");
-  const pag=document.getElementById("pagination");
-  const slides=Array.from(track.children);
-  if(!slides.length) return;
-  function spv(){ return window.innerWidth>=1024?3:(window.innerWidth>=700?2:1); }
-  let current=0;
-  function pages(){ return Math.max(1, Math.ceil(slides.length / spv())); }
-  function goTo(p){
-    const page = Math.max(0, Math.min(pages()-1, p));
-    current = page;
-    const width = slides[0].getBoundingClientRect().width;
-    track.style.transform = 'translate3d(' + (-(page*spv())*width) + 'px,0,0)';
-    update();
-  }
-  function rebuildPag(){
-    pag.innerHTML = "";
-    for (let i=0;i<pages();i++){
-      const b = document.createElement("span");
-      b.className = "lsyr_pagination-bullet"+(i===current?" lsyr_pagination-bullet-active":"");
-      b.addEventListener("click", ()=>goTo(i));
-      pag.appendChild(b);
-    }
-  }
-  function update(){
-    Array.from(pag.children).forEach((b,i)=>b.classList.toggle("lsyr_pagination-bullet-active", i===current));
-    prev.disabled = current===0;
-    next.disabled = current>=pages()-1;
-  }
-  window.addEventListener("resize", ()=>{ rebuildPag(); goTo(Math.min(current, pages()-1)); });
-  prev.addEventListener("click", ()=>goTo(current-1));
-  next.addEventListener("click", ()=>goTo(current+1));
-  rebuildPag(); goTo(0);
-}
-async function main(){
-  try{
-    const companyRaw = await fetchJson(buildUrl("PARSE_COMPANY_DIRECT"));
-    const company = mapCompany(companyRaw);
-    document.getElementById("companyRating").textContent = company.rating;
-    document.getElementById("companyStars").innerHTML = svgStars(parseFloat(company.rating));
-    document.getElementById("companyCounts").textContent = "На основе " + company.reviews_count + " отзывов";
-    document.getElementById("companyLink").href = `${MAPS_BASE}/${CONFIG.COMPANY_ID}/reviews/`;
-
-    const reviewsRaw = await fetchJson(buildUrl("PARSE_REVIEWS_DIRECT"));
-    const reviews = sortAndFilter((Array.isArray(reviewsRaw)?reviewsRaw:reviewsRaw.items||[]).map(mapReview));
-    const track = document.getElementById("track");
-    track.innerHTML = reviews.map(slideTemplate).join("");
-    document.querySelectorAll(".lsyr_readmore").forEach(clampText);
-    initSlider();
-  } catch (e){
-    console.error(e);
-    document.getElementById("track").innerHTML = '<div style="padding:12px;color:#b00;background:#fff3f3;border:1px solid #ffd0d0;border-radius:6px">Ошибка загрузки: '+(e && e.message ? e.message : e)+'</div>';
-  }
-}
-main();
-</script>
+<script src="main.js"></script>
 </body>
 </html>
