@@ -7,9 +7,13 @@ ini_set('error_log', __DIR__ . '/proxy_error.log');
 
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, X-Requested-With');
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: *');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+  http_response_code(204);
+  exit;
+}
 
 $ALLOWED_ACTIONS = ['PARSE_COMPANY_DIRECT', 'PARSE_REVIEWS_DIRECT'];
 $EXTERNAL = 'http://217.114.4.16/seleniumParser/direct_parser.php';
