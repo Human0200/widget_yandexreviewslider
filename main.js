@@ -1,22 +1,26 @@
 function $id(id){ const el=document.getElementById(id); if(!el){ console.warn('⛔ Не найден элемент #'+id); } return el; }
 function setHref(id, url){ const el=$id(id); if(el) el.href = url; }
 
-// Чтение конфигурации из data-атрибутов
+// Чтение конфигурации из data-атрибутов, установленных через Bitrix24 редактор
 function getConfig() {
   const appBody = document.querySelector('.lsyr_app-body');
-  if (!appBody) {
-    console.error('❌ Основной контейнер блока не найден');
-    return null;
-  }
-  
+  if (!appBody) return null;
+
+  const reviewBox = document.querySelector('.lsyr_review-box');
+  const reviewList = document.querySelector('.lsyr_review-list'); 
+  const ratingBadge = document.querySelector('.lsyr_business-summary-rating-badge-view__rating');
+  const stars = document.querySelector('.lsyr_business-rating-badge-view__stars');
+
+  if(parseInt(reviewBox.dataset.limit) > 50) reviewBox.dataset.limit = 50;
+
   return {
-    COMPANY_ID: appBody.dataset.companyId || "45616405414",
-    PROXY_URL: appBody.dataset.proxyUrl || "https://app.lead-space.ru/WidgetYandexReviews/api/proxy.php",
-    LIMIT: parseInt(appBody.dataset.limit) || 12,
-    HIDE_NEGATIVE: appBody.dataset.hideNegative === "true",
+    COMPANY_ID: appBody.dataset.companyId,
+    PROXY_URL: "https://app.lead-space.ru/WidgetYandexReviews/api/proxy.php",
+    LIMIT: reviewBox ? parseInt(reviewBox.dataset.limit) || 25 : 25,
+    HIDE_NEGATIVE: reviewList ? reviewList.dataset.hideNegative === "true" : true,
     SORT: {
-      column: appBody.dataset.sortColumn || "timestamp",
-      order: appBody.dataset.sortOrder || "desc"
+      column: ratingBadge ? ratingBadge.dataset.sortColumn || "name" : "name",
+      order: stars ? stars.dataset.sortOrder || "desc" : "desc"
     }
   };
 }
@@ -28,6 +32,7 @@ if (!CONFIG) {
 
 const MAPS_BASE = "https://yandex.ru/maps/org";
 
+// Остальные функции остаются без изменений...
 function resolveProxyUrl() {
   const p = (CONFIG.PROXY_URL||"").trim();
   if (/^https?:\/\//i.test(p)) return p;
@@ -86,7 +91,7 @@ function generateStars(rating, size = 16) {
   for (let i = 0; i < fullStars; i++) {
     html += `<span class="inline-image _loaded icon lsyr_business-rating-badge-view__star _full" aria-hidden="true" role="button" tabindex="-1" style="font-size: 0px; line-height: 0;">
       <svg width="${size}" height="${size}" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.985 11.65l-3.707 2.265a.546.546 0 0 1-.814-.598l1.075-4.282L1.42 6.609a.546.546 0 0 1 .29-.976l4.08-.336 1.7-3.966a.546.546 0 0 1 1.004.001l1.687 3.965 4.107.337c.496.04.684.67.29.976l-3.131 2.425 1.073 4.285a.546.546 0 0 1-.814.598L7.985 11.65z" fill="#FC0"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.985 11.65l-3.707 2.265a.546.546 0 0 1-.814-.598l1.075-4.282L1.42 6.609a.546.546 0 0 1-.29-.976l4.08-.336 1.7-3.966a.546.546 0 0 1 1.004.001l1.687 3.965 4.107.337c.496.04.684.67.29.976l-3.131 2.425 1.073 4.285a.546.546 0 0 1-.814.598L7.985 11.65z" fill="#FC0"/>
       </svg>
     </span>`;
   }
@@ -136,11 +141,6 @@ function mapReview(r){
 function sortAndFilter(rs){
   let res = rs.slice();
   if (CONFIG.HIDE_NEGATIVE) res = res.filter(x => x.rating >= 4);
-  if (CONFIG.SORT && CONFIG.SORT.column){
-    const col = CONFIG.SORT.column, 
-          dir = (CONFIG.SORT.order || "asc").toLowerCase() === "desc" ? -1 : 1;
-    res.sort((a,b) => (a[col] > b[col] ? 1 : -1) * dir);
-  }
   if (CONFIG.LIMIT) res = res.slice(0, CONFIG.LIMIT);
   return res;
 }
