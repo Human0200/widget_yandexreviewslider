@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 define('DB_HOST', 'v90860qz.beget.tech');
 define('DB_NAME', 'v90860qz_widget');
 define('DB_USER', 'v90860qz_widget');
-define('DB_PASS', '*IUvD7dE5Ov*');
+define('DB_PASS', '5B%uhQfSgMXg');
 define('DB_CHARSET', 'utf8mb4');
 
 // Настройки кеширования (в секундах) - 24 часа

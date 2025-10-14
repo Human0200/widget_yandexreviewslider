@@ -3,18 +3,28 @@ require_once 'crest.php';
 
 // Устанавливаем приложение
 $result = CRest::installApp();
-if ($result && !isset($result['error'])) {
-    echo "Приложение успешно установлено!";
-    
+if ($result && ! isset($result['error'])) {
+    echo 'Приложение успешно установлено!';
+
     // Регистрируем блок отзывов
     registerReviewsBlock();
 } else {
-    echo "Ошибка установки: " . ($result['error_description'] ?? 'Неизвестная ошибка');
+    echo 'Ошибка установки: '.($result['error_description'] ?? 'Неизвестная ошибка');
 }
 
 // Функция для регистрации блока отзывов
-function registerReviewsBlock() {
+function registerReviewsBlock()
+{
     $htmlCode = '<div class="lsyr_app-body">
+  <!-- Скрытые контейнеры для атрибутов настроек -->
+  <div class="lsyr_attr-company-id" style="display: none;"></div>
+  <div class="lsyr_attr-limit" style="display: none;"></div>
+  <div class="lsyr_attr-hide-negative" style="display: none;"></div>
+  <div class="lsyr_attr-sort-column" style="display: none;"></div>
+  <div class="lsyr_attr-sort-order" style="display: none;"></div>
+  <div class="lsyr_attr-slide-desktop-count" style="display: none;"></div>
+  <div class="lsyr_attr-slide-mobile-count" style="display: none;"></div>
+  
   <div class="lsyr_review-box lsyr_review-unselectable">
     <div class="lsyr_business-summary-rating-badge-view__rating">
       <span id="companyName">Загрузка...</span>
@@ -60,7 +70,8 @@ function registerReviewsBlock() {
       </div>
     </div>
   </div>
-</div>';
+</div>
+';
 
     $blockData = [
         'code' => 'yandex_reviews_block',
@@ -69,18 +80,25 @@ function registerReviewsBlock() {
             'DESCRIPTION' => 'Блок для отображения отзывов с Яндекс.Карт',
             'SECTIONS' => 'cover,about',
             'PREVIEW' => 'https://www.bitrix24.ru/images/b24_screen.png',
-            'CONTENT' => $htmlCode
+            'CONTENT' => $htmlCode,
         ],
         'manifest' => [
             'assets' => [
                 'css' => [
-                    'https://app.lead-space.ru/WidgetYandexReviews/styles.css'
+                    'https://app.lead-space.ru/WidgetYandexReviews/slick/slick.css',
+                    'https://app.lead-space.ru/WidgetYandexReviews/slick/slick-theme.css',
+                    'https://app.lead-space.ru/WidgetYandexReviews/style.css',
                 ],
                 'js' => [
-                    'https://app.lead-space.ru/WidgetYandexReviews/main.js'
-                ]
+                    'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js',
+                    'https://unpkg.com/vue@3/dist/vue.global.prod.js',
+                    'https://app.lead-space.ru/WidgetYandexReviews/slick/slick.min.js',
+                    'https://app.lead-space.ru/WidgetYandexReviews/js/readmore.js',
+                    'https://app.lead-space.ru/WidgetYandexReviews/main.js',
+                ],
             ],
             'style' => [
+                // Стили применяются к реальным элементам с классами
                 '.lsyr_app-body' => [
                     'name' => 'Основной контейнер',
                     'type' => 'box',
@@ -92,64 +110,77 @@ function registerReviewsBlock() {
                 '.lsyr_review-list' => [
                     'name' => 'Список отзывов',
                     'type' => 'box',
-                ]
+                ],
             ],
             'attrs' => [
-                '.lsyr_app-body' => [
+                // Атрибуты применяются к конкретным скрытым контейнерам
+                '.lsyr_attr-company-id' => [
                     'name' => 'ID компании в Яндекс.Картах',
                     'type' => 'text',
                     'attribute' => 'data-company-id',
-                    'value' => '45616405414'
+                    'value' => '',
                 ],
-                '.lsyr_review-box' => [
-                    'name' => 'Количество отображаемых отзывов',
+                '.lsyr_attr-limit' => [
+                    'name' => 'Количество отображаемых отзывов(не больше 50)',
                     'type' => 'text',
                     'attribute' => 'data-limit',
-                    'value' => '12'
+                    'value' => '',
                 ],
-                '.lsyr_review-list' => [
+                '.lsyr_attr-slide-desktop-count' => [
+                    'name' => 'Количество отображаемых слайдов на ПК',
+                    'type' => 'text',
+                    'attribute' => 'data-slide-desktop-count',
+                    'value' => '',
+                ],
+                '.lsyr_attr-slide-mobile-count' => [
+                    'name' => 'Количество отображаемых слайдов на Мобильном устройстве',
+                    'type' => 'text',
+                    'attribute' => 'data-slide-mobile-count',
+                    'value' => '',
+                ],
+                '.lsyr_attr-hide-negative' => [
                     'name' => 'Фильтрация отзывов',
                     'type' => 'list',
                     'attribute' => 'data-hide-negative',
                     'items' => [
                         'true' => 'Скрывать негативные (рейтинг < 4)',
-                        'false' => 'Показывать все отзывы'
-                    ]
+                        'false' => 'Показывать все отзывы',
+                    ],
                 ],
-                '.lsyr_business-summary-rating-badge-view__rating' => [
+                '.lsyr_attr-sort-column' => [
                     'name' => 'Сортировка по',
                     'type' => 'list',
                     'attribute' => 'data-sort-column',
                     'items' => [
-                        'rating' => 'Рейтингу', 
-                        'name' => 'Имени автора'
-                    ]
+                        'rating' => 'Рейтингу',
+                        'name' => 'Имени автора',
+                    ],
                 ],
-                '.lsyr_business-rating-badge-view__stars' => [
+                '.lsyr_attr-sort-order' => [
                     'name' => 'Порядок сортировки',
-                    'type' => 'list', 
+                    'type' => 'list',
                     'attribute' => 'data-sort-order',
                     'items' => [
                         'desc' => 'По убыванию',
-                        'asc' => 'По возрастанию'
-                    ]
-                ]
-            ]
-        ]
+                        'asc' => 'По возрастанию',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     // Сначала удаляем старый блок (если есть)
     $unregisterResult = CRest::call('landing.repo.unregister', [
-        'code' => $blockData['code']
+        'code' => $blockData['code'],
     ]);
 
     // Регистрируем новый блок
     $registerResult = CRest::call('landing.repo.register', $blockData);
 
     if (isset($registerResult['result'])) {
-        echo "<br>Блок отзывов успешно зарегистрирован!";
+        echo '<br>Блок отзывов успешно зарегистрирован!';
     } else {
-        echo "<br>Ошибка регистрации блока: " . ($registerResult['error_description'] ?? 'Неизвестная ошибка');
+        echo '<br>Ошибка регистрации блока: '.($registerResult['error_description'] ?? 'Неизвестная ошибка');
     }
 }
 ?>

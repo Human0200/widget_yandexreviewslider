@@ -1,0 +1,92 @@
+[01-Oct-2025 20:11:36 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[02-Oct-2025 02:39:19 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[02-Oct-2025 09:19:16 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[02-Oct-2025 09:40:18 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[02-Oct-2025 09:56:49 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[02-Oct-2025 10:10:45 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[02-Oct-2025 11:09:32 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[02-Oct-2025 11:14:07 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[02-Oct-2025 17:04:13 Europe/Moscow] DB Connection failed: SQLSTATE[HY000] [1045] Access denied for user 'v90860qz_widget'@'m2.cobra.beget.com' (using password: YES)
+[02-Oct-2025 17:04:16 Europe/Moscow] DB Connection failed: SQLSTATE[HY000] [1045] Access denied for user 'v90860qz_widget'@'m2.cobra.beget.com' (using password: YES)
+[03-Oct-2025 09:25:54 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[06-Oct-2025 09:17:27 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[06-Oct-2025 17:55:48 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[06-Oct-2025 18:04:29 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[07-Oct-2025 17:46:47 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[08-Oct-2025 11:12:14 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[08-Oct-2025 11:12:28 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[08-Oct-2025 11:13:52 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[08-Oct-2025 11:23:25 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154
+[08-Oct-2025 11:23:38 Europe/Moscow] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php:154
+Stack trace:
+#0 /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php(304): saveReviewsToDB('undefined', Array)
+#1 {main}
+  thrown in /home/v/v90860qz/app.lead-space.ru/public_html/WidgetYandexReviews/api/proxy.php on line 154

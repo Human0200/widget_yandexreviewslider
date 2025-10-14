@@ -1,0 +1,2 @@
+# vidzhet_konstruktora_saytov_b24_yandeks_otzyvy34769
+Приложение для облачного битрикс
